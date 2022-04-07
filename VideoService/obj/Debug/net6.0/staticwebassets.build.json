@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JmqikpRAlLWcVu20rIDkS8S1bF2k4xYkEEWNf1g6aRw=",
+  "Source": "VideoService",
+  "BasePath": "_content/VideoService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
