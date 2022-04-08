@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using VideoService.Data;
 using VideoService.Dtos;
 using VideoService.Models;
+using VideoService.SyncComm.Http;
 
 namespace VideoService.Controller
 {
@@ -13,11 +13,16 @@ namespace VideoService.Controller
     {
         private readonly IVideoRepo _repository;
         private IMapper _mapper;
+        private readonly ILikeDataClient _likeDataClient;
 
-        public VideosController(IVideoRepo repository, IMapper mapper)
+        public VideosController(
+            IVideoRepo repository,
+            IMapper mapper,
+            ILikeDataClient likeDataClient)
         {
             _repository = repository;
             _mapper = mapper;
+            _likeDataClient = likeDataClient;
         }
 
         [HttpGet]
@@ -42,13 +47,22 @@ namespace VideoService.Controller
         }
 
         [HttpPost]
-        public ActionResult<VideoPostDto> CreateVideo(VideoPostDto videoPostDto)
+        public async Task<ActionResult<VideoPostDto>> CreateVideo(VideoPostDto videoPostDto)
         {
             var video = _mapper.Map<Video>(videoPostDto);
             _repository.CreateVideo(video);
             _repository.SaveChanges();
 
             var videoReadDto = _mapper.Map<VideoReadDto>(video);
+
+            try
+            {
+                await _likeDataClient.SendVideoIdToLikes(4);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Something really bad happened during creating the video and sending it to the likes service {e.InnerException}");
+            }
 
             return CreatedAtRoute(nameof(GetVideoById), new { id = videoReadDto.Id }, videoReadDto);
         }
