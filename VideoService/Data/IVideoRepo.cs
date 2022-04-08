@@ -16,5 +16,7 @@ namespace VideoService.Data
 
         void CreateVideo(Video vid);
 
+        bool DeleteVideo(int id);
+
     }
 }

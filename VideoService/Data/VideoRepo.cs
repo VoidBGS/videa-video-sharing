@@ -34,6 +34,20 @@ namespace VideoService.Data
             return _context.Videos.FirstOrDefault(x => x.Id == id);
         }
 
+        public bool DeleteVideo(int id)
+        {
+            Video video = GetVideoById(id);
+
+            if(video == null)
+            {
+                return false;
+            }
+
+            _context.Remove(video);
+
+            return true;
+        }
+
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
