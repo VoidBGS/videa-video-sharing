@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using VideoService.AsyncComm;
 using VideoService.Data;
 using VideoService.Dtos;
 using VideoService.Models;
@@ -14,15 +15,18 @@ namespace VideoService.Controller
         private readonly IVideoRepo _repository;
         private IMapper _mapper;
         private readonly ILikeDataClient _likeDataClient;
+        private readonly IMessageBusClient _messageBusClient;
 
         public VideosController(
             IVideoRepo repository,
             IMapper mapper,
-            ILikeDataClient likeDataClient)
+            ILikeDataClient likeDataClient,
+            IMessageBusClient messageBusClient)
         {
             _repository = repository;
             _mapper = mapper;
             _likeDataClient = likeDataClient;
+            _messageBusClient = messageBusClient;
         }
 
         [HttpGet]
@@ -54,16 +58,26 @@ namespace VideoService.Controller
             _repository.SaveChanges();
 
             var videoReadDto = _mapper.Map<VideoReadDto>(video);
+            //HTTP SYNC METHOD WAS HERE
+            //try
+            //{
+            //    await _likeDataClient.SendVideoIdToLikes(4);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine($"Something really bad happened during creating the video and sending it to the likes service {e.InnerException}");
+            //}
 
             try
             {
-                await _likeDataClient.SendVideoIdToLikes(4);
+                var videoPublishedDto = _mapper.Map<VideoPublishDto>(videoReadDto);
+                videoPublishedDto.Event = "Video Published";
+                _messageBusClient.PublishNewVideo(videoPublishedDto);
             }
-            catch (Exception e)
+            catch(Exception ex)
             {
-                Console.WriteLine($"Something really bad happened during creating the video and sending it to the likes service {e.InnerException}");
+                Console.WriteLine("Could not send using RabbitMQ. Error: " + ex.Message);
             }
-
             return CreatedAtRoute(nameof(GetVideoById), new { id = videoReadDto.Id }, videoReadDto);
         }
 

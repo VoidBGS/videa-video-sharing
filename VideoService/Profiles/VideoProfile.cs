@@ -10,6 +10,7 @@ namespace VideoService.Profiles
         {
             CreateMap<Video, VideoReadDto>();
             CreateMap<VideoPostDto, Video>();
+            CreateMap<VideoReadDto, VideoPublishDto>();
         }
     }
 }

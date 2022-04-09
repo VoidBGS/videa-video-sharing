@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using VideoService.AsyncComm;
 using VideoService.Data;
 using VideoService.SyncComm.Http;
 
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(
     opt => opt.UseInMemoryDatabase("MemoryDB"));
 builder.Services.AddScoped<IVideoRepo, VideoRepo>();
 builder.Services.AddHttpClient<ILikeDataClient, HttpLikeDataClient>();
+builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();
