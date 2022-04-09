@@ -20,4 +20,12 @@ services:
             - "7001:80"
         restart: on-failure
 
+    like-service:
+        build: ./LikeService
+        container_name: likeservice
+        image: voidbgs/likeservice
+        ports:
+            - "8001:80"
+        restart: on-failure
+
 
