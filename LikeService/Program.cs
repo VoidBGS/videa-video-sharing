@@ -1,4 +1,6 @@
+using LikeService.AsyncComm;
 using LikeService.Data;
+using LikeService.EventProcessing;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMemory"));
 builder.Services.AddScoped<ILikeRepo, LikeRepo>();
+builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddHostedService<MessageBusSubscriber>();
 
 var app = builder.Build();
 SeedDatabase.PrepData(app);

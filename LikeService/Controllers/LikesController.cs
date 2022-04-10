@@ -34,7 +34,7 @@ namespace LikeService.Controllers
         {
             var likes = _repository.GetVideoLikes(id);
 
-            return Ok("Amount of likes " + likes + " Video id supplied " + id);
+            return Ok(likes);
         }
     }
 }

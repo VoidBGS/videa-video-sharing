@@ -14,6 +14,9 @@ namespace VideoService.Models
         public string Length { get; set; }
 
         [Required]
+        public string Thumbnail { get; set; }
+
+        [Required]
         public string Author { get; set; }
 
         [Required]

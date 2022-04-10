@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using LikeService.Dtos;
 using LikeService.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LikeService.Profiles
 {
@@ -14,6 +10,7 @@ namespace LikeService.Profiles
         {
             CreateMap<LikePostDto, Like>();
             CreateMap<LikeReadDto, Like>();
+            CreateMap<VideoPublishedDto, Like>();
         }
     }
 }

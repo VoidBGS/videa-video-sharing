@@ -13,6 +13,8 @@ namespace VideoService.Dtos
 
         public string Length { get; set; }
 
+        public string Thumbnail { get; set; }
+
         public string Author { get; set; }
 
         public string URL { get; set; }

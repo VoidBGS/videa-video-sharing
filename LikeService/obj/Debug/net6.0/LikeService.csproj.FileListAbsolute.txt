@@ -34,3 +34,4 @@ C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\LikeService\obj\Deb
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\LikeService\obj\Debug\net6.0\LikeService.pdb
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\LikeService\obj\Debug\net6.0\LikeService.genruntimeconfig.cache
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\LikeService\obj\Debug\net6.0\ref\LikeService.dll
+C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\LikeService\bin\Debug\net6.0\RabbitMQ.Client.dll
