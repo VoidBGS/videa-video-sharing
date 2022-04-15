@@ -14,6 +14,21 @@ services:
         networks:
             - video-service
 
+    videa-database:
+        container_name: "videa-database"
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        environment:
+            - "ACCEPT_EULA=Y"
+            - "SA_PASSWORD=kriso"
+            - "MSSQL_PID=Developer"
+        ports:
+            - "9000:80"
+        networks:
+            - video-service
+        restart: on-failure
+        depends_on:
+            - rabbitmq3
+
     video-service:
         build: ./VideoService
         container_name: videoservice
