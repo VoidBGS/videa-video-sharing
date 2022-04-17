@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(
-    opt => opt.UseInMemoryDatabase("MemoryDB"));
+    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("VideaContext")));
 builder.Services.AddScoped<IVideoRepo, VideoRepo>();
 builder.Services.AddHttpClient<ILikeDataClient, HttpLikeDataClient>();
 builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();

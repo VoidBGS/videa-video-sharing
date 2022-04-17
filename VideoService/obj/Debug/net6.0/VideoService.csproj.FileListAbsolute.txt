@@ -63,3 +63,5 @@ C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\obj\De
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\obj\Debug\net6.0\VideoService.genruntimeconfig.cache
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\obj\Debug\net6.0\ref\VideoService.dll
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\RabbitMQ.Client.dll
+C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\Npgsql.dll
+C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

@@ -16,16 +16,19 @@ services:
 
     videa-database:
         container_name: "videa-database"
-        image: "mcr.microsoft.com/mssql/server:2019-latest"
-        environment:
-            - "ACCEPT_EULA=Y"
-            - "SA_PASSWORD=kriso"
-            - "MSSQL_PID=Developer"
+        image: postgres:14.2-alpine
         ports:
-            - "9000:80"
+            - '5432:5432'
+        volumes: 
+            - ./var/lib/postgresql/data
+            - ./initDb.sql:/docker-entrypoint-initdb.d/initDb.sql
         networks:
             - video-service
-        restart: on-failure
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=kriso1234
+            - POSTGRES_DB=videa
+        restart: unless-stopped
         depends_on:
             - rabbitmq3
 
@@ -40,13 +43,14 @@ services:
         restart: on-failure
         depends_on:
             - rabbitmq3
+            - videa-database
 
     like-service:
         build: ./LikeService
         container_name: likeservice
         image: voidbgs/likeservice
         ports:
-            - "8001:80"
+            - "7002:80"
         networks:
             - video-service
         restart: on-failure
@@ -67,3 +71,6 @@ services:
     
 networks:
     video-service:
+
+volumes:
+  videa-database:

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using VideoService.Models;
 
 namespace VideoService.Data
@@ -15,6 +16,18 @@ namespace VideoService.Data
 
         private static void SeedData(AppDbContext context)
         {
+
+            Console.WriteLine("Attempting to apply migrations to database.");
+
+            try
+            {
+                context.Database.Migrate();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Migration failed. Error: " + ex.Message);
+            }
+
             if (!context.Videos.Any())
             {
                 Console.WriteLine("Seeding Database");
