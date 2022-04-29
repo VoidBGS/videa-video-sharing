@@ -3,6 +3,11 @@ name: Build my services using docker-compose
 on:
   push:
     branches: [ main ]
+
+env:
+  DOCKER_USER: ${{secrets.USERNAME}}
+  DOCKER_PASSWORD: ${{secrets.SESAME}}
+  REPO_NAME: ${{secrets.REPO}}
     
 jobs:
   build:
@@ -10,13 +15,9 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+      - name: Log into DockerHub
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the Docker images
         run: docker-compose build
       - name: Push Video Service to DockerHub
-        uses: docker/push-action@v2
-        with:
-          file: VideoService/Dockerfile
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.SESAME }}
-          repository: ${{ secrets.REPO }}
-          tags: ${{ github.run_number }}, latest
+        run: docker build ./VideoService --file Dockerfile --tag $DOCKER_USER/$REPO_NAME
