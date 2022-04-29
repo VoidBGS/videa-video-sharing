@@ -20,4 +20,4 @@ jobs:
       - name: Build the Docker images
         run: docker-compose build
       - name: Push Video Service to DockerHub
-        run: docker build ./VideoService --file Dockerfile --tag $DOCKER_USER/$REPO_NAME
+        run: docker push $DOCKER_USER/$REPO_NAME
