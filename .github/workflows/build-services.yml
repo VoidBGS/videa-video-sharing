@@ -1,0 +1,12 @@
+name: Build my services using docker-compose
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build the Docker images
+        run: docker-compose build
