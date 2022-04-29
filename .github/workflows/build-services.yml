@@ -1,4 +1,4 @@
-name: Build my services using docker-compose
+name: Build and Push Services
 
 on:
   push:
