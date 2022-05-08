@@ -19,5 +19,5 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the Docker images
         run: docker-compose build
-      - name: Push Video Service to DockerHub
-        run: docker push $DOCKER_USER/$REPO_NAME
+      - name: Push All Services to DockerHub
+        run: docker-compose push
