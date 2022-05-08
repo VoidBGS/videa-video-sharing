@@ -1,0 +1,90 @@
+.videa-sidebar {
+    width: 15em;
+    height: 100vh;
+    background-color: var(--clr-videa-primary);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--clr-videa-bg);
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: var(--shadow-videa-sharp);
+}
+
+.videa-sidebar::-webkit-scrollbar {
+    width: 0.6em;
+}
+
+.videa-sidebar::-webkit-scrollbar-track {
+    background-color: rgba(44, 44, 46, 0.98)
+}
+
+.videa-sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--clr-videa-secondary);
+    border-radius: 50px;
+}
+
+.videa-sidebar-logo {
+    position: block;
+    position: absolute;
+    top: 0.5em;
+    border-bottom:  var(--line-videa-thin) ridge var(--clr-videa-line)
+}
+
+.videa-sidebar-menu-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25em;
+    position: absolute;
+    top: 8em;
+}
+
+.videa-footer{
+    border-top: var(--line-videa-thin) ridge var(--clr-videa-line);
+
+}
+
+.videa-sidebar-footer-box {
+    position: block;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding-block: 0.5em;
+}
+
+.footer-icon-box:hover{
+    background-color: var(--clr-videa-secondary-light);
+}
+
+.footer-icon-box:active{
+    background-color: var(--clr-videa-bg);
+}
+
+.videa-footer-socials{
+    padding-block: 0.8em;
+}
+
+.videa-footer-desc{
+    color: var(--clr-videa-secondary);
+    font-size: 0.7rem;
+    border-top: var(--line-videa-thin) ridge var(--clr-videa-line);
+    padding-block: 1.5em;
+}
+
+.menu-item-box {
+    padding-block: 1.2em;
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+    cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+.menu-item-box:hover {
+    background-color: var(--clr-videa-line);
+}

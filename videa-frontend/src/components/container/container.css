@@ -1,0 +1,8 @@
+.videa-content-container{
+    position: absolute;
+    left: 16em;
+    top: 5em;
+    background-color: var(--clr-videa-bg);
+    overflow: auto;
+    width: 90em;
+}

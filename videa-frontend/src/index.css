@@ -1,0 +1,89 @@
+@font-face {
+  font-family: "Roboto";
+  src: url('style/fonts/Roboto-Regular.ttf');
+}
+@font-face {
+  font-family: "Roboto Bold";
+  src: url('style/fonts/Roboto-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Roboto Light";
+  src: url('style/fonts/Roboto-Light.ttf');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: "Roboto Thin";
+  src: url('style/fonts/Roboto-Thin.ttf');
+  font-weight: 200;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --clr-videa-primary: #2c2c2e;
+  --clr-videa-secondary: #c4c4c4;
+  --clr-videa-secondary-light: #ceced1;
+  --clr-videa-dark: #444446;
+  --clr-videa-line: #363638;
+  --clr-videa-bg: rgb(241, 241, 241);
+  --clr-videa-outline: rgb(31, 165, 255);
+
+  --line-videa-thick: 0.3em;
+  --line-videa-thin: 0.2em;
+
+  --shadow-videa-sharp: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  --shadow-videa-medium: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+html{
+  width: 100%;
+}
+
+body{
+  font-family:'Roboto', 'Segoe UI', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  letter-spacing: 1px !important;
+  width: 100%;
+  height: 100%;
+  font-size: 1.1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--clr-videa-bg);
+}
+
+html::-webkit-scrollbar {
+  width: 0.6em;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: rgba(44, 44, 46, 0.98)
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: var(--clr-videa-secondary);
+  border-radius: 50px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App{
+  position: relative;
+}
+
+.videa-link {
+  text-decoration: none;
+  color: var(--clr-videa-bg);
+}
+
+.videa-link-dark {
+  text-decoration: none;
+  color: var(--clr-videa-primary);
+}
