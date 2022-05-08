@@ -1,0 +1,23 @@
+name: Build and Push Services
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  DOCKER_USER: ${{secrets.USERNAME}}
+  DOCKER_PASSWORD: ${{secrets.SESAME}}
+  REPO_NAME: ${{secrets.REPO}}
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Log into DockerHub
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build the Docker images
+        run: docker-compose build
+      - name: Push Video Service to DockerHub
+        run: docker push $DOCKER_USER/$REPO_NAME
