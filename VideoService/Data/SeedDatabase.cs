@@ -6,26 +6,28 @@ namespace VideoService.Data
 {
     public static class SeedDatabase
     {
-        public static void PrepData(IApplicationBuilder app)
+        public static void PrepData(IApplicationBuilder app, bool isProd)
         {
             using( var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>());
+                SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(), isProd);
             }
         }
 
-        private static void SeedData(AppDbContext context)
+        private static void SeedData(AppDbContext context, bool isProd)
         {
 
             Console.WriteLine("Attempting to apply migrations to database.");
 
-            try
-            {
-                context.Database.Migrate();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Migration failed. Error: " + ex.Message);
+            if (isProd) { 
+                try
+                {
+                    context.Database.Migrate();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Migration failed. Error: " + ex.Message);
+                }
             }
 
             if (!context.Videos.Any())
