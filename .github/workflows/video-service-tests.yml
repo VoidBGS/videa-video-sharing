@@ -1,4 +1,4 @@
-name: dotnet package
+name: Video Service Tests
 
 on: [push]
 
