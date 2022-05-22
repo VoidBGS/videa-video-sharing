@@ -35,7 +35,7 @@ const VideoPage = () => {
     }
 
     return (
-        <div className='video-page flex between w-full'>
+        <div className='video-page flex between w-full' data-testid="video-page-main">
             {
                 video ? <MainVideo video={video} likes={likes} getLikesById={getLikesByVideoId}/> :<MainVideo/>
             }
