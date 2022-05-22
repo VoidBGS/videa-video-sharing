@@ -9,7 +9,7 @@ import UploadVideoButton from './UploadVideoButton';
 
 const Navbar = () => {
     return (
-        <div className='videa-navbar'>
+        <div className='videa-navbar' data-testid='navbar-component'>
             <div className="videa-navbar-box flex between v-center">
                 <div className='flex center'>
                     <Logo />

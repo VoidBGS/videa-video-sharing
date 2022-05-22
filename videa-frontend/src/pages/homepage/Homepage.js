@@ -51,10 +51,10 @@ const Homepage = () => {
     }
 
     return videos.length !== 0 ? (
-        <div className='videa-homepage w-full'>
+        <div className='videa-homepage w-full' data-testid="homepage-main">
             {
                 rows.map(row => (
-                    <div className='flex w-full wrap'>
+                    <div className='flex w-full wrap' key={row}>
                         {row.map(vid => (
                             <VideoBox Video={vid} key={vid.id} />
                         ))}
@@ -63,7 +63,7 @@ const Homepage = () => {
             }
         </div>
     ) : (
-        <div>
+        <div data-testid="video-page-main">
             Video Service is not responding or there are no videos
         </div>
     );
