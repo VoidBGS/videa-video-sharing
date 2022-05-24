@@ -14,9 +14,14 @@ const MainVideo = ({ video, likes, getLikesById }) => {
 
     const handleClick = (e) =>{
         e.preventDefault();
-        console.log("Vid id: " + id);
+        let URL = "";
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development' || process.env.JEST_WORKER_ID) {
+            URL = process.env.REACT_APP_VIDEOS_SERVICE_TESTING;
+        } else {
+            URL = process.env.REACT_APP_VIDEOS_SERVICE;
+        }
         let form = {videoId: id};
-        axios.post(process.env.REACT_APP_LIKES_SERVICE, form)
+        axios.post(URL, form)
         .then(function(response){
             console.log(response);
             getLikesById();

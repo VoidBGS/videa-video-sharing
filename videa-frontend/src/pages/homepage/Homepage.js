@@ -13,8 +13,12 @@ const Homepage = () => {
     }, []);
 
     const getVideos = () => {
-        const URL = process.env.REACT_APP_VIDEOS_SERVICE;
-        console.log(URL);
+        let URL = "";
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development' || process.env.JEST_WORKER_ID) {
+            URL = process.env.REACT_APP_VIDEOS_SERVICE_TESTING;
+        } else {
+            URL = process.env.REACT_APP_VIDEOS_SERVICE;
+        }
         if (URL !== "") {
             axios.get(URL).then(function (response) {
                 setVideos(response.data);

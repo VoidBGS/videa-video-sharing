@@ -32,8 +32,14 @@ const UploadVideoButton = () => {
         let form = { title: video.title, length: "13:37", thumbnail: video.thumbnail, author: "someDev", url: video.link };
 
         try {
-            console.log("posting video to " + process.env.REACT_APP_VIDEOS_SERVICE);
-            axios.post(process.env.REACT_APP_VIDEOS_SERVICE, form, {
+            let URL = "";
+            if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development' || process.env.JEST_WORKER_ID) {
+                URL = process.env.REACT_APP_VIDEOS_SERVICE_TESTING;
+            } else {
+                URL = process.env.REACT_APP_VIDEOS_SERVICE;
+            }
+            console.log("posting video to " + URL);
+            axios.post(URL, form, {
                 timeout: 2500,
             })
                 .then(function (response) {

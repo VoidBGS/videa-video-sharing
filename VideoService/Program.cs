@@ -4,6 +4,7 @@ using VideoService.Data;
 using VideoService.SyncComm.Http;
 
 var builder = WebApplication.CreateBuilder(args);
+var allowEveryOrigin = "_myAllowSpecificOrigins";
 IWebHostEnvironment environment = builder.Environment;
 
 builder.Services.AddControllers();
@@ -19,6 +20,15 @@ else
 {
     Console.WriteLine("Using In-Memory Database..");
     builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMemory"));
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: allowEveryOrigin,
+                          policy =>
+                          {
+                              policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                          });
+    });
 }
 builder.Services.AddHttpClient<ILikeDataClient, HttpLikeDataClient>();
 builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
@@ -33,6 +43,8 @@ SeedDatabase.PrepData(app, environment.IsProduction());
 
 if (app.Environment.IsDevelopment())
 {
+    Console.WriteLine("Application is in Development.");
+    app.UseCors(allowEveryOrigin);
     app.UseSwagger();
     app.UseSwaggerUI();
 }
