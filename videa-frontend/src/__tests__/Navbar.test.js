@@ -1,8 +1,13 @@
-import {fireEvent, render, screen } from '@testing-library/react';
+import { waitFor, findByText, fireEvent, render, screen } from '@testing-library/react';
 import Navbar from "../components/navbar/Navbar.js";
+import UploadVideoButton from '../components/navbar/UploadVideoButton.js';
+import Homepage from '../pages/homepage/Homepage.js';
+import axios from 'axios';
 import {
     MemoryRouter,
-  } from "react-router-dom";
+    Routes,
+    Route
+} from "react-router-dom";
 
 test('Clicks on add upload button', () => {
     render(
@@ -47,16 +52,19 @@ test('Clicks on add upload button and changes textbox', () => {
 
     expect(linkTb);
 
-    fireEvent.change(linkTb,{target: {value: 'test'}} )
+    fireEvent.change(linkTb, { target: { value: 'test' } })
 
     expect(linkTb.value).toBe('test');
 })
 
 
-test('Clicks on add upload button and submits form', () => {
+test('Clicks on add upload button and submits form', async () => {
     render(
         <MemoryRouter initialEntries={["/"]}>
             <Navbar />
+            <Routes>
+                <Route path="/" element={<Homepage />} />
+            </Routes>
         </MemoryRouter>
     );
 
@@ -80,15 +88,27 @@ test('Clicks on add upload button and submits form', () => {
     expect(titleTb);
     expect(thumbnailTb);
 
-    fireEvent.change(linkTb, {target: {value: 'https://www.youtube.com/watch?v=CkECqIknhJk'}} );
+    fireEvent.change(linkTb, { target: { value: 'https://www.youtube.com/watch?v=CkECqIknhJk' } });
     expect(linkTb.value).toBe('https://www.youtube.com/watch?v=CkECqIknhJk');
 
-    fireEvent.change(titleTb,{target: {value: 'Video Testing'}} );
-    expect(titleTb.value).toBe('Video Testing');
+    fireEvent.change(titleTb, { target: { value: 'Video Testing E2E' } });
+    expect(titleTb.value).toBe('Video Testing E2E');
 
-    fireEvent.change(thumbnailTb,{target: {value: 'https://media.moddb.com/images/mods/1/45/44306/gamejolt_thumbnail.1.png'}} );
-    expect(thumbnailTb.value).toBe('https://media.moddb.com/images/mods/1/45/44306/gamejolt_thumbnail.1.png');
+    fireEvent.change(thumbnailTb, { target: { value: 'https://ntvb.tmsimg.com/assets/p8696131_b_h10_aa.jpg' } });
+    expect(thumbnailTb.value).toBe('https://ntvb.tmsimg.com/assets/p8696131_b_h10_aa.jpg');
 
     let submitBtn = screen.getByTestId('video-submit-button');
     expect(submitBtn);
+
+    let uploadForm = screen.getAllByTestId('video-page-upload-video-form');
+    expect(uploadForm);
+
+    // fireEvent.submit(uploadForm);
+    fireEvent.click(submitBtn);
+
+    const successMessage = await waitFor(() => screen.findByText("Video has been posted successfully!"), {
+        timeout: 3000
+    });
+
+    expect(successMessage).toBeInTheDocument;
 })

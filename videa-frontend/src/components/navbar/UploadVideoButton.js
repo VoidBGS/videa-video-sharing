@@ -4,43 +4,66 @@ import React, { useState } from 'react';
 const UploadVideoButton = () => {
 
     const [isClicked, setIsClicked] = useState(false);
-    const [video, setVideo] = useState({ link: "", title: "", thumbnail: ""});
+    const [video, setVideo] = useState({ link: "", title: "", thumbnail: "" });
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
         setIsClicked(!isClicked)
     }
 
-    const handleChange = (event) => {
-        setVideo({ ...video, [event.target.name]: event.target.value });
+    const handleChange = (e) => {
+        e.preventDefault();
+        setVideo({ ...video, [e.target.name]: e.target.value });
     };
+
+    const handleModalClick = (e) => {
+        e.preventDefault();
+        setIsSuccess(false);
+        setIsError(false);
+        window.location.reload();
+    }
 
     const handleVideoSubmit = (e) => {
         e.preventDefault();
+        setIsLoading(true);
         let form = { title: video.title, length: "13:37", thumbnail: video.thumbnail, author: "someDev", url: video.link };
 
-        axios.post(process.env.REACT_APP_VIDEOS_SERVICE, form)
-            .then(function (response) {
-                console.log(response);
-                if (response.status === 201) {
+        try {
+            console.log("posting video to " + process.env.REACT_APP_VIDEOS_SERVICE);
+            axios.post(process.env.REACT_APP_VIDEOS_SERVICE, form, {
+                timeout: 2500,
+            })
+                .then(function (response) {
+                    console.log("Video has been posted");
+                    if (response.status === 201) {
+                        setIsLoading(false);
+                        setIsClicked(false);
+                        setIsSuccess(true);
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Error encountered when submitting vid: " + error);
+                    setIsLoading(false);
+                    setIsError(true);
                     setIsClicked(false);
-                    window.location.reload();
-                }
-            })
-            .catch(function (error) {
-                console.log("Error encountered when submitting vid: " + error);
-                setIsClicked(false);
-            })
+                })
+        } catch (error) {
+            console.error("Posting video failed");
+            console.error(error);
+        }
     }
 
-    const cleanUrl = (url) => {
-        //replace the watch part
-        let urlEmbed = url.replace("watch?v=", "embed/");
-        //replace the params
-        let cleanedURL = urlEmbed.split("&")[0];
+    // const cleanUrl = (url) => {
+    //     //replace the watch part
+    //     let urlEmbed = url.replace("watch?v=", "embed/");
+    //     //replace the params
+    //     let cleanedURL = urlEmbed.split("&")[0];
 
-        return cleanedURL;
-    }
+    //     return cleanedURL;
+    // }
 
     return (
         <>
@@ -50,26 +73,41 @@ const UploadVideoButton = () => {
             {isClicked ?
                 <div className='videa-create-video-modal-bg flex center' data-testid="create-video-modal">
                     <div className='videa-create-video-modal'>
-                        <form className='videa-form p-3' onSubmit={handleVideoSubmit}>
-                            <h2 className='videa-form-title color-white pb-2'>Videa Upload</h2>
-                            <div className='p-3'>
-                                {/* <label className='videa-textbox-label' for="link">Link</label> */}
-                                <input className='videa-textbox p-2' type="url" onChange={handleChange} required name="link" placeholder='Video link' data-testid="video-link-textbox"></input>
-                            </div>
-                            <div className='p-3'>
-                                {/* <label className='videa-textbox-label' for="title">Title</label> */}
-                                <input className='videa-textbox p-2' type="text" onChange={handleChange} minLength="3" maxLength="60" required name="title" placeholder='Video title' data-testid="video-title-textbox"></input>
-                            </div>
-                            <div className='p-3'>
-                                {/* <label className='videa-textbox-label' for="title">Title</label> */}
-                                <input className='videa-textbox p-2' type="url" onChange={handleChange} required name="thumbnail" placeholder='Link to Thumbnail Image' data-testid="video-thumbnail-textbox"></input>
-                            </div>
-                            <div className='p-3'>
-                                <input className='videa-button p-3' type="submit" value="Upload" data-testid="video-submit-button"></input>
-                            </div>
+                    {!isLoading ?
+                        <form className='videa-form p-3' onSubmit={handleVideoSubmit} data-testid="video-page-upload-video-form">
+                                    <h2 className='videa-form-title color-white pb-2'>Videa Upload</h2>
+                                    <span className='videa-form-close' onClick={handleClick}>Close</span>
+                                    <div className='p-3'>
+                                        {/* <label className='videa-textbox-label' for="link">Link</label> */}
+                                        <input className='videa-textbox p-2' type="url" onChange={handleChange} required name="link" placeholder='Video link' data-testid="video-link-textbox"></input>
+                                    </div>
+                                    <div className='p-3'>
+                                        {/* <label className='videa-textbox-label' for="title">Title</label> */}
+                                        <input className='videa-textbox p-2' type="text" onChange={handleChange} minLength="3" maxLength="60" required name="title" placeholder='Video title' data-testid="video-title-textbox"></input>
+                                    </div>
+                                    <div className='p-3'>
+                                        {/* <label className='videa-textbox-label' for="title">Title</label> */}
+                                        <input className='videa-textbox p-2' type="url" onChange={handleChange} required name="thumbnail" placeholder='Link to Thumbnail Image' data-testid="video-thumbnail-textbox"></input>
+                                    </div>
+                                    <div className='p-3'>
+                                        <input className='videa-button p-3' type="submit" value="Upload" data-testid="video-submit-button"></input>
+                                    </div>
                         </form>
+                        : <div class="loader"></div>}
                     </div>
                 </div> : ""}
+
+            {isSuccess ?
+                <div className='videa-post-modal' onClick={handleModalClick}>
+                    Video has been posted successfully!
+                </div>
+                : ""}
+
+            {isError ?
+                <div className='videa-post-modal' onClick={handleModalClick}>
+                    An error has been encountered during the request! Please try again.
+                </div>
+                : ""}
         </>
     );
 }
