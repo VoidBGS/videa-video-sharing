@@ -26,6 +26,9 @@ The reason for this is that I wanted to have separations between the different a
 ## Testing Environment
 During this project I created my own testing enviornment as I needed a way to run everything in development mode, while using an in-memory database. I created a new file called *docker-compose.testing.yml*, where I included the services, I needed for my testing needs. I also created an *nginx.test.conf* file, where I pointed to my testing services. I used the docker-compose.testing.yml file to run the services in development mode, so that they automatically use the in-memory database I programmed to start only when the service is started in development mode. I also created two modes for my React App, development, and production, I use different API URLs for the different modes. All of this put together created a reliable testing environment that gave me a lot more confidence in the reliability of my software solution.
 
+## Database
+I used PostgreSQL for my database of choice. Postgre is an open-source *object* relational database. Postgre offers me more features than a traditional MySQL database, and it is compliant with all the use cases I have for this project. I included this database by using an Docker image and hosting it as a service, using docker-compose. 
+
 ## Security
 I am working on this right now.
 
