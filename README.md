@@ -31,3 +31,6 @@ I am working on this right now.
 
 ## AWS Deployment
 I am working on this right now.
+
+## How to run
+To do
