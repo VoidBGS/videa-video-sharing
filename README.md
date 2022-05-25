@@ -1,6 +1,8 @@
 # videa-video-sharing
 A video sharing platform, created for semester 6 of my university. The architecture of this application will be the microservices architecture.
 
+## Architecture
+
 ## Microservices
 In this project I have a couple microservices that basically act as mini projects connected. This way of creating applications is very effective, although it is very difficult to do correctly, as there is a lot of nuances and complexities that come from such an architecture. I have two services that I have created with dotnet Web API, a Video and a Like service. Both services are made simple, as to avoid any additional complexity, I had enough on my plate already during this semester. 
 
