@@ -19,19 +19,21 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: Install .NET dependencies
-        run: dotnet restore VideoService/ 
-      - name: Test Video Video Service in developer mode
-        run:  dotnet test VideoService/
       - name: Use Node.js 17.x
         uses: actions/setup-node@v1
         with:
           node-version: 17.x
-      - name: npm ci, build and test
+      - name: Install
         run: |
+          dotnet restore VideoService/ 
           cd videa-frontend/
           npm ci
+      - name: Testing
+        run: |
+          docker-compose up -d -f docker-compose.testing.yml
+          cd videa-frontend
           npm test
+          docker-compose down -f docker-compose.testing.yml
       - name: Build the Docker images
         run: docker-compose build
       - name: Log into DockerHub
