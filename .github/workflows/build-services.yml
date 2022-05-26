@@ -21,9 +21,9 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: Install .NET dependencies
-        run: dotnet restore
+        run: dotnet restore VideoService/ 
       - name: Run Video Video Service in developer mode
-        run: dotnet run
+        run: dotnet run VideoService/
       - name: Use Node.js 17.x
         uses: actions/setup-node@v1
         with:
