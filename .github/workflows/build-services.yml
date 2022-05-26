@@ -32,7 +32,7 @@ jobs:
         run: |
           docker-compose -f docker-compose.testing.yml up -d
           cd videa-frontend
-          sleep 5s
+          sleep 30s & echo 'Waiting..'
           npm test
           docker-compose -f docker-compose.testing.yml down
       - name: Build the Docker images
