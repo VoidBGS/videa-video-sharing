@@ -99,7 +99,7 @@ const UploadVideoButton = () => {
                                         <input className='videa-button p-3' type="submit" value="Upload" data-testid="video-submit-button"></input>
                                     </div>
                         </form>
-                        : <div class="loader"></div>}
+                        : <div className="loader"></div>}
                     </div>
                 </div> : ""}
 

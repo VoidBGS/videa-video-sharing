@@ -119,29 +119,29 @@ namespace VideoService.Test
             //Assert
             Assert.AreEqual("Video has not been found", result);
         }
-        //[TestMethod]
-        //public async Task Create_Video()
-        //{
-        //    //Arrange
-        //    var webAppFactory = new WebApplicationFactory<Program>();
-        //    var httpClient = webAppFactory.CreateDefaultClient();
+        [TestMethod]
+        public async Task Create_Video()
+        {
+           //Arrange
+           var webAppFactory = new WebApplicationFactory<Program>();
+           var httpClient = webAppFactory.CreateDefaultClient();
 
-        //    string title = "if this coconut picture gets deleted, tf2 stops working (jk, just a misconception being spread)";
-        //    string length = "4:15";
-        //    string thumbnail = "https://i.ytimg.com/vi/WLx_3bON0Mw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBCA6nCy5Tg6kTM0Agb8VzONd7eOQ";
-        //    string author = "someoneElse";
-        //    string url = "https://www.youtube.com/embed/WLx_3bON0Mw";
+           string title = "if this coconut picture gets deleted, tf2 stops working (jk, just a misconception being spread)";
+           string length = "4:15";
+           string thumbnail = "https://i.ytimg.com/vi/WLx_3bON0Mw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBCA6nCy5Tg6kTM0Agb8VzONd7eOQ";
+           string author = "someoneElse";
+           string url = "https://www.youtube.com/embed/WLx_3bON0Mw";
 
-        //    Video videoObj = new Video() { Title = title, Length = length, Thumbnail = thumbnail,Author = author, URL = url };
-        //    var stringContent = new StringContent(videoObj.ToString().ToLower(), Encoding.UTF8, "application/json");
+           Video videoObj = new Video() { Title = title, Length = length, Thumbnail = thumbnail,Author = author, URL = url };
+           var stringContent = new StringContent(videoObj.ToString().ToLower(), Encoding.UTF8, "application/json");
 
-        //    //Act
-        //    var response = await httpClient.PostAsync($"/api/videos", stringContent);
-        //    var result = await response.Content.ReadAsStringAsync();
-        //    dynamic serializedResult = JObject.Parse(result);
+           //Act
+           var response = await httpClient.PostAsync($"/api/videos", stringContent);
+           var result = await response.Content.ReadAsStringAsync();
+           dynamic serializedResult = JObject.Parse(result);
 
-        //    //Assert
-        //    Assert.AreEqual(author, Convert.ToString(serializedResult.author));
-        //}
+           //Assert
+           Assert.AreEqual(author, Convert.ToString(serializedResult.author));
+        }
     }
 }

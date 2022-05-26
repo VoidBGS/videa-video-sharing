@@ -100,9 +100,6 @@ test('Clicks on add upload button and submits form', async () => {
     let submitBtn = screen.getByTestId('video-submit-button');
     expect(submitBtn);
 
-    let uploadForm = screen.getAllByTestId('video-page-upload-video-form');
-    expect(uploadForm);
-
     // fireEvent.submit(uploadForm);
     fireEvent.click(submitBtn);
 
