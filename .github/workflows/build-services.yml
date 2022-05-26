@@ -29,9 +29,9 @@ jobs:
           node-version: 17.x
       - name: npm ci, build and test
         run: |
-          npm ci
-          npm run build --if-present
-          npm test
+          npm ci videa-frontend/
+          npm run build videa-frontend/
+          npm test videa-frontend/
       - name: Build the Docker images
         run: docker-compose build
       - name: Log into DockerHub
