@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - run: cd VideoService
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
@@ -28,10 +27,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 17.x
+      - run: cd videa-frontend
       - name: Install react dependencies
-        run: npm install ./videa-frontend
+        run: npm install
       - name: Run E2E tests
-        run: npm test ./videa-frontend
+        run: npm run test
       - name: Build the Docker images
         run: docker-compose build
       - name: Log into DockerHub
