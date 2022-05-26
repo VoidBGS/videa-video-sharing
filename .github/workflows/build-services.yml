@@ -23,7 +23,7 @@ jobs:
       - name: Install .NET dependencies
         run: dotnet restore VideoService/ 
       - name: Run Video Video Service in developer mode
-        run: dotnet run VideoService/
+        run: dotnet run
       - name: Use Node.js 17.x
         uses: actions/setup-node@v1
         with:
