@@ -1,4 +1,4 @@
-name: Build and Push Services
+name: Build, Test and Push Videa
 
 on:
   push:
@@ -7,13 +7,34 @@ on:
 env:
   DOCKER_USER: ${{secrets.USERNAME}}
   DOCKER_PASSWORD: ${{secrets.SESAME}}
+  DOTNET_VERSION: '6.0.x'
     
 jobs:
-  build:
+  build-set-test-push:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Use Node.js 17.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 17.x
+      - name: Install
+        run: |
+          dotnet restore VideoService/ 
+          cd videa-frontend/
+          npm ci
+      - name: Testing
+        run: |
+          docker-compose -f docker-compose.testing.yml up -d
+          cd videa-frontend
+          sleep 30s & echo 'Waiting..'
+          npm test
+          docker-compose -f docker-compose.testing.yml down
       - name: Build the Docker images
         run: docker-compose build
       - name: Log into DockerHub
