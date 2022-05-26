@@ -31,7 +31,6 @@ jobs:
         run: |
           cd videa-frontend/
           npm ci
-          npm run build
           npm test
       - name: Build the Docker images
         run: docker-compose build
