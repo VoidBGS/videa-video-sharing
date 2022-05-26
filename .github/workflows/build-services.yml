@@ -30,7 +30,7 @@ jobs:
       - name: Install react dependencies
         run: npm install videa-frontend/
       - name: Run E2E tests 
-        run: npm run test videa-frontend/
+        run: npm run videa-frontend/
       - name: Build the Docker images
         run: docker-compose build
       - name: Log into DockerHub
