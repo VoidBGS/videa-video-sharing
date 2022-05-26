@@ -1,4 +1,4 @@
-name: Build and Push Services
+name: Build, Test and Push Videa
 
 on:
   push:
@@ -7,13 +7,30 @@ on:
 env:
   DOCKER_USER: ${{secrets.USERNAME}}
   DOCKER_PASSWORD: ${{secrets.SESAME}}
+  DOTNET_VERSION: '6.0.x'
     
 jobs:
-  build:
+  build-set-test-push:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Install .NET dependencies
+        run: dotnet restore VideoService/
+      - name: Run Video Video Service in developer mode
+        run: dotnet run VideoService/
+      - name: Use Node.js 17.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 17.x
+      - name: Install react dependencies
+      - run: npm install videa-frontend/
+      - name: Run E2E tests
+      - run: npm test videa-frontend/
       - name: Build the Docker images
         run: docker-compose build
       - name: Log into DockerHub
