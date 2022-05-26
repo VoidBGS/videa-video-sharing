@@ -28,9 +28,9 @@ jobs:
         with:
           node-version: 17.x
       - name: Install react dependencies
-      - run: npm install videa-frontend/
+        run: npm install videa-frontend/
       - name: Run E2E tests
-      - run: npm test videa-frontend/
+        run: npm test videa-frontend/
       - name: Build the Docker images
         run: docker-compose build
       - name: Log into DockerHub
