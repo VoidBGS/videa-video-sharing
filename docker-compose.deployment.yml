@@ -1,0 +1,70 @@
+version: "3.8"
+services:
+    rabbitmq3:
+        container_name: "rabbitmq"
+        image: rabbitmq:3.8-management-alpine
+        environment:
+            - RABBITMQ_DEFAULT_USER=myuser
+            - RABBITMQ_DEFAULT_PASS=mypassword
+        ports:
+            # AMQP protocol port
+            - '5672:5672'
+            # HTTP management UI
+            - '15672:15672'
+
+    videa-database:
+        container_name: "videa-database"
+        image: postgres:14.2-alpine
+        ports:
+            - '5432:5432'
+        volumes: 
+            - ./var/lib/postgresql/data
+            - ./initDb.sql:/docker-entrypoint-initdb.d/initDb.sql
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=kriso1234
+            - POSTGRES_DB=videa
+        restart: unless-stopped
+        depends_on:
+            - rabbitmq3
+
+    # video-service:
+    #     container_name: videoservice
+    #     image: voidbgs/videoservice
+    #     ports:
+    #         - "7001:80"
+    #     restart: on-failure
+    #     depends_on:
+    #         - rabbitmq3
+    #         - videa-database
+
+    like-service:
+        container_name: likeservice
+        image: voidbgs/likeservice
+        ports:
+            - "7002:80"
+        restart: on-failure
+        depends_on:
+            - rabbitmq3
+
+    frontend-client:
+        container_name: frontendclient
+        image: voidbgs/frontendclient
+        ports:
+            - "80:80"
+        restart: on-failure
+        depends_on:
+            - api-gateway
+
+    api-gateway:
+        image: nginx:alpine
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        ports:
+            - "4000:4000"
+        depends_on:
+            - like-service
+    
+
+volumes:
+  videa-database:
