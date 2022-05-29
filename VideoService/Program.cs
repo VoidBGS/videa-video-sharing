@@ -12,9 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IVideoRepo, VideoRepo>();
 if (environment.IsProduction())
 {
-    Console.WriteLine("Using Postgre SQL Database..");
+    Console.WriteLine("Using Azure SQL Server Database..");
     builder.Services.AddDbContext<AppDbContext>(
-    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("VideaContext")));
+    opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("VideaContext")));
 }
 else
 {

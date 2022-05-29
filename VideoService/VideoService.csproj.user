@@ -2,5 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ShowAllFiles>true</ShowAllFiles>
+    <ActiveDebugProfile>Docker</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\.github\workflows\build-services.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

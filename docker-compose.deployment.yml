@@ -12,31 +12,14 @@ services:
             # HTTP management UI
             - '15672:15672'
 
-    videa-database:
-        container_name: "videa-database"
-        image: postgres:14.2-alpine
+    video-service:
+        container_name: videoservice
+        image: voidbgs/videoservice
         ports:
-            - '5432:5432'
-        volumes: 
-            - ./var/lib/postgresql/data
-            - ./initDb.sql:/docker-entrypoint-initdb.d/initDb.sql
-        environment:
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=kriso1234
-            - POSTGRES_DB=videa
-        restart: unless-stopped
+            - "7001:80"
+        restart: on-failure
         depends_on:
             - rabbitmq3
-
-    # video-service:
-    #     container_name: videoservice
-    #     image: voidbgs/videoservice
-    #     ports:
-    #         - "7001:80"
-    #     restart: on-failure
-    #     depends_on:
-    #         - rabbitmq3
-    #         - videa-database
 
     like-service:
         container_name: likeservice
@@ -64,7 +47,3 @@ services:
             - "4000:4000"
         depends_on:
             - like-service
-    
-
-volumes:
-  videa-database:

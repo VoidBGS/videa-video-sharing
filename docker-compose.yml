@@ -14,24 +14,6 @@ services:
         networks:
             - video-service
 
-    videa-database:
-        container_name: "videa-database"
-        image: postgres:14.2-alpine
-        ports:
-            - '5432:5432'
-        volumes: 
-            - ./var/lib/postgresql/data
-            - ./initDb.sql:/docker-entrypoint-initdb.d/initDb.sql
-        networks:
-            - video-service
-        environment:
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=kriso1234
-            - POSTGRES_DB=videa
-        restart: unless-stopped
-        depends_on:
-            - rabbitmq3
-
     video-service:
         build: ./VideoService
         container_name: videoservice
@@ -43,7 +25,6 @@ services:
         restart: on-failure
         depends_on:
             - rabbitmq3
-            - videa-database
 
     like-service:
         build: ./LikeService
@@ -83,6 +64,3 @@ services:
     
 networks:
     video-service:
-
-volumes:
-  videa-database:
