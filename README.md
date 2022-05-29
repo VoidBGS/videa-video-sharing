@@ -19,7 +19,7 @@ The frontend, in my case, also acts as a service and can be scaled depending on 
 During this project I made sure to prepare myself when it came to Github Actions, even then I still experienced hardships while creating the numerous steps required to set up the whole continuous integration and continuous delivery pipeline with Github. I opted to use three actions in total:
 1. Run backend tests
 2. Run CodeQl
-3. Prepare, Build, Test and Push services to DockerHub and AWS
+3. Prepare, Build, Test and Push images to DockerHub.
 
 The reason for this is that I wanted to have separations between the different actions as much as possible, but I also wanted to have control over which steps are done first. Because of this I decided to keep the files to a minimum number and instead I focused on having one large file that prepares, builds, tests, and pushes everything correctly, while two more github action yaml files act as support. The first yaml file runs the Integrations tests that I've setup for the backend and makes sure that everything is running correctly. The second file goes over the quality of the code and searches for any vulnerabilities or bad practices. The third and most important yaml file prepares the testing environment, builds all the services correctly, runs the end-to-end tests and, if everything succeeds the services are pushed to DockerHub and uploaded to AWS.
 
@@ -32,8 +32,8 @@ I used PostgreSQL for my database of choice. Postgre is an open-source *object* 
 ## Security
 I am working on this right now.
 
-## AWS Deployment
-I am working on this right now.
+## Microsoft Azure Deployment
+I've decided to deploy my application on microsoft azure. I chose this over AWS as I have a student account with 100$ to spare from my university and setting up the environment there would not be that difficult from what I researched. The main problem that I forsee is that my database and nginx conf file would need to be allocated on the cloud as well. I am considering switching to a online cloud database an not bothering with an image.
 
 ## How to run
 To do
