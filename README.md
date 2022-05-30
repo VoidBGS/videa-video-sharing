@@ -28,12 +28,22 @@ During this project I created my own testing enviornment as I needed a way to ru
 
 ## Database
 I used PostgreSQL for my database of choice. Postgre is an open-source *object* relational database. Postgre offers me more features than a traditional MySQL database, and it is compliant with all the use cases I have for this project. I included this database by using an Docker image and hosting it as a service, using docker-compose. 
+Since I decided to move to the cloud I changed my database. I decided that I should migrate to the Azure SQL Server database, that is a paid service (but I got it for free for 1 year). The new database is easier to setup in the cloud, as I do not need any setup files and I can just hook it up very easy in production.
 
 ## Security
 I am working on this right now.
 
 ## Microsoft Azure Deployment
 I've decided to deploy my application on microsoft azure. I chose this over AWS as I have a student account with 100$ to spare from my university and setting up the environment there would not be that difficult from what I researched. The main problem that I forsee is that my database and nginx conf file would need to be allocated on the cloud as well. I am considering switching to a online cloud database an not bothering with an image.
+This project is currently running in a VM that is hosted in the cloud. Im considering getting a proper domain and setting up SSL for it, so that I can improve upon security.
 
 ## How to run
-To do
+Running this project is very easy if you have Docker
+
+This method should work currently (5/30/2022)
+1. Pull this repository
+2. Run my docker-compose file
+3. Type localhost as browser URL and everything should be automatically set
+
+If the method above does not work, since I am reliant on the cloud for my database. Run my docker-compose.testing file with the
+**docker-compose -f docker-compose-testing.yml** command in the CLI. This will run everything in testing and development mode. The databases will be In-Memory, but they will work and will give a good idea of what the project is supposed to work like.
