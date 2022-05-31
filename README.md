@@ -35,7 +35,7 @@ I am working on this right now.
 
 ## Microsoft Azure Deployment
 I've decided to deploy my application on microsoft azure. I chose this over AWS as I have a student account with 100$ to spare from my university and setting up the environment there would not be that difficult from what I researched. The main problem that I forsee is that my database and nginx conf file would need to be allocated on the cloud as well. I am considering switching to a online cloud database an not bothering with an image.
-This project is currently running in a VM that is hosted in the cloud. Im considering getting a proper domain and setting up SSL for it, so that I can improve upon security.
+This project is currently running in a VM that is hosted in the cloud. Im considering getting a proper domain and setting up SSL for it, so that I can improve security.
 
 ## How to run
 Running this project is very easy if you have Docker
