@@ -4,7 +4,7 @@ A video sharing platform, created for semester 6 of my university. The architect
 ## Architecture
 ![Architecture Image](https://i.ibb.co/xzxj1Zn/Architecture-V2-drawio.png)
 ## Microservices
-In this project I have a couple microservices that basically act as mini projects connected. This way of creating applications is very effective, although it is very difficult to do correctly, as there is a lot of nuances and complexities that come from such an architecture. I have two services that I have created with dotnet Web API, a Video and a Like service. Both services are made simple, as to avoid any additional complexity, I had enough on my plate already during this semester. 
+In this project I have a couple microservices that basically act as mini projects connected. This way of creating applications is very effective, although it is very difficult to do correctly, as there is a lot of nuances and complexities that come from such an architecture. I have two services that I have created with dotnet Web API, a Video and a Like service. Both services are made simple, as to avoid any additional complexity. 
 
 ## Asynchronous communication
 One of the main benefits from having microservices as the backend architecture is that they are very loosely coupled and scalable. This means that the services need to communicate somehow between each other. There was an option to create *synchronous* HTTP requests between the services, but that makes the services less loosely coupled and less scalable, which kind of kills the point of having such an architecture in the first place. That's why I opted for RabbitMQ, which is a Message Broker, and it supports *asynchronous* communication. The aim here was to have a simple (and stupid) event bus, but more complex services.
