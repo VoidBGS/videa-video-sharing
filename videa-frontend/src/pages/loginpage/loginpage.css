@@ -1,0 +1,50 @@
+.login-page-wrap{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ceced1;
+}
+.login-page-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 15em;
+    padding: 1em;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.login-page-details > *{
+    margin-block: 0.2em;
+}
+
+.login-page-details > input{
+    width: 100%;
+    padding-block: 0.5em;
+
+}
+
+.login-page-details > button{
+    margin-top: 1em;
+    width: 100%;
+    font-size: 1rem;
+    background-color: #42434b;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    padding: 0.5em;
+
+}
+.login-page-details > button:hover{
+    background-color: #ceced1;
+    outline:1px solid rgb(31, 165, 255);
+    color: #42434b;
+}
+.videa-logo{
+    max-width: 20em;
+}
