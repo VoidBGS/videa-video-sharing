@@ -4,7 +4,7 @@ A video sharing platform, created for semester 6 of my university. The architect
 ## Architecture
 ![Architecture Image](https://i.ibb.co/xzxj1Zn/Architecture-V2-drawio.png)
 ## Microservices
-In this project I have a couple microservices that basically act as mini projects connected. This way of creating applications is very effective, although it is very difficult to do correctly, as there is a lot of nuances and complexities that come from such an architecture. I have two services that I have created with dotnet Web API, a Video and a Like service. Both services are made simple, as to avoid any additional complexity, I had enough on my plate already during this semester. 
+In this project I have a couple microservices that basically act as mini projects connected. This way of creating applications is very effective, although it is very difficult to do correctly, as there is a lot of nuances and complexities that come from such an architecture. I have two services that I have created with dotnet Web API, a Video and a Like service. Both services are made simple, as to avoid any additional complexity. 
 
 ## Asynchronous communication
 One of the main benefits from having microservices as the backend architecture is that they are very loosely coupled and scalable. This means that the services need to communicate somehow between each other. There was an option to create *synchronous* HTTP requests between the services, but that makes the services less loosely coupled and less scalable, which kind of kills the point of having such an architecture in the first place. That's why I opted for RabbitMQ, which is a Message Broker, and it supports *asynchronous* communication. The aim here was to have a simple (and stupid) event bus, but more complex services.
@@ -28,12 +28,22 @@ During this project I created my own testing enviornment as I needed a way to ru
 
 ## Database
 I used PostgreSQL for my database of choice. Postgre is an open-source *object* relational database. Postgre offers me more features than a traditional MySQL database, and it is compliant with all the use cases I have for this project. I included this database by using an Docker image and hosting it as a service, using docker-compose. 
+Since I decided to move to the cloud I changed my database. I decided that I should migrate to the Azure SQL Server database, that is a paid service (but I got it for free for 1 year). The new database is easier to setup in the cloud, as I do not need any setup files and I can just hook it up very easy in production.
 
 ## Security
 I am working on this right now.
 
 ## Microsoft Azure Deployment
 I've decided to deploy my application on microsoft azure. I chose this over AWS as I have a student account with 100$ to spare from my university and setting up the environment there would not be that difficult from what I researched. The main problem that I forsee is that my database and nginx conf file would need to be allocated on the cloud as well. I am considering switching to a online cloud database an not bothering with an image.
+This project is currently running in a VM that is hosted in the cloud. Im considering getting a proper domain and setting up SSL for it, so that I can improve security.
 
 ## How to run
-To do
+Running this project is very easy if you have Docker
+
+This method should work currently (5/30/2022)
+1. Pull this repository
+2. Run my docker-compose file
+3. Type localhost as browser URL and everything should be automatically set
+
+If the method above does not work, since I am reliant on the cloud for my database. Run my docker-compose.testing file with the
+**docker-compose -f docker-compose-testing.yml** command in the CLI. This will run everything in testing and development mode. The databases will be In-Memory, but they will work and will give a good idea of what the project is supposed to work like.
