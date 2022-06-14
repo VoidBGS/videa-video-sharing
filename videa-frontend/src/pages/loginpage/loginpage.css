@@ -40,6 +40,10 @@
     padding: 0.5em;
 
 }
+.login-page-details > h4{
+    color:rgb(255, 9, 9);
+    font-weight: 900;
+}
 .login-page-details > button:hover{
     background-color: #ceced1;
     outline:1px solid rgb(31, 165, 255);
@@ -47,4 +51,19 @@
 }
 .videa-logo{
     max-width: 20em;
+}
+.img-container{
+    border-bottom: solid 1px gray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loading-login{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

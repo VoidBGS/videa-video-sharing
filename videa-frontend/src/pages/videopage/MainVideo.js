@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import "./videopage.css";
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 const MainVideo = ({ video, likes, getLikesById }) => {
 

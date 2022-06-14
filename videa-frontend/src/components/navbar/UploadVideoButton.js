@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UploadVideoButton = () => {
-
+    const { isAuthenticated } = useAuth0();
     const [isClicked, setIsClicked] = useState(false);
     const [video, setVideo] = useState({ link: "", title: "", thumbnail: "" });
     const [isSuccess, setIsSuccess] = useState(false);
@@ -28,6 +29,10 @@ const UploadVideoButton = () => {
 
     const handleVideoSubmit = (e) => {
         e.preventDefault();
+        if(!isAuthenticated){
+            console.error("Unauthorized submit detected.");
+            return;
+        }
         setIsLoading(true);
         let form = { title: video.title, length: "13:37", thumbnail: video.thumbnail, author: "someDev", url: video.link };
 
@@ -83,19 +88,19 @@ const UploadVideoButton = () => {
                         <form className='videa-form p-3' onSubmit={handleVideoSubmit} data-testid="video-page-upload-video-form">
                                     <h2 className='videa-form-title color-white pb-2'>Videa Upload</h2>
                                     <span className='videa-form-close' onClick={handleClick}>Close</span>
-                                    <div className='p-3'>
+                                    <div className='videa-textbox-wrap p-3'>
                                         {/* <label className='videa-textbox-label' for="link">Link</label> */}
-                                        <input className='videa-textbox p-2' type="url" onChange={handleChange} required name="link" placeholder='Video link' data-testid="video-link-textbox"></input>
+                                        <input className='videa-textbox pt-2 pb-2' type="url" onChange={handleChange} required name="link" placeholder='Video link' data-testid="video-link-textbox"></input>
                                     </div>
-                                    <div className='p-3'>
+                                    <div className='videa-textbox-wrap p-3'>
                                         {/* <label className='videa-textbox-label' for="title">Title</label> */}
-                                        <input className='videa-textbox p-2' type="text" onChange={handleChange} minLength="3" maxLength="60" required name="title" placeholder='Video title' data-testid="video-title-textbox"></input>
+                                        <input className='videa-textbox pt-2 pb-2' type="text" onChange={handleChange} minLength="3" maxLength="60" required name="title" placeholder='Video title' data-testid="video-title-textbox"></input>
                                     </div>
-                                    <div className='p-3'>
+                                    <div className='videa-textbox-wrap p-3'>
                                         {/* <label className='videa-textbox-label' for="title">Title</label> */}
-                                        <input className='videa-textbox p-2' type="url" onChange={handleChange} required name="thumbnail" placeholder='Link to Thumbnail Image' data-testid="video-thumbnail-textbox"></input>
+                                        <input className='videa-textbox pt-2 pb-2' type="url" onChange={handleChange} required name="thumbnail" placeholder='Link to Thumbnail Image' data-testid="video-thumbnail-textbox"></input>
                                     </div>
-                                    <div className='p-3'>
+                                    <div className='videa-textbox-wrap p-3'>
                                         <input className='videa-button p-3' type="submit" value="Upload" data-testid="video-submit-button"></input>
                                     </div>
                         </form>

@@ -4,5 +4,5 @@
     top: 5em;
     background-color: var(--clr-videa-bg);
     overflow: auto;
-    width: 90em;
+    width: 80%;
 }

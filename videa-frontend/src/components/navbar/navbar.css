@@ -23,12 +23,29 @@
     width: 70%;
 }
 
+.searchbar-profile-menu{
+    position: absolute;
+    top: 3em;
+    right:-30px;
+    padding: 1em;
+    z-index: 10000;
+    font-size: 1rem;
+    color: var(--clr-videa-bg);
+    background-color: var(--clr-videa-primary);
+}
+
+.searchbar-image.user-profile-image{
+    width: 100%;
+    border-radius: 50%;
+}
+
 .searchbar-image-box {
     width: 2em;
     min-height: 2em;
     border-radius: 50%;
     background-color: var(--clr-videa-secondary);
     cursor: pointer;
+    position: relative;
 }
 
 .searchbar-image-box:hover {
@@ -113,8 +130,12 @@
     position: relative;
 }
 
+.videa-textbox-wrap{
+    width: 100%;
+}
+
 .videa-textbox {
-    width: 30em;
+    width: 100%;
     font-size: 1rem;
 }
 

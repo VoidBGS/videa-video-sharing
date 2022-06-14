@@ -1,4 +1,11 @@
-.video-page{
+.loader-wrap{
+    width: 100%;
+    min-height: 20em;
+    max-height: 20em;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-video-box{
