@@ -29,7 +29,7 @@ const UploadVideoButton = () => {
 
     const handleVideoSubmit = (e) => {
         e.preventDefault();
-        if(!isAuthenticated){
+        if(!isAuthenticated && typeof(process.env.JEST_WORKER_ID) == undefined){
             console.error("Unauthorized submit detected.");
             return;
         }

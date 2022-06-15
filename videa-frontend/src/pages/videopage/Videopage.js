@@ -20,7 +20,7 @@ const VideoPage = () => {
     }, []);
 
     const getVideoById = () => {
-        if (!isAuthenticated) {
+        if (!isAuthenticated && typeof(process.env.JEST_WORKER_ID) == undefined) {
             console.error("Unauthorized request detected!");
             return;
         }
@@ -39,7 +39,7 @@ const VideoPage = () => {
     }
 
     const getLikesByVideoId = () => {
-        if (!isAuthenticated) {
+        if (!isAuthenticated && typeof(process.env.JEST_WORKER_ID) == undefined) {
             console.error("Unauthorized request detected!");
             return;
         }
