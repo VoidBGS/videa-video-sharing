@@ -7,8 +7,6 @@
     width: 100%;
     min-width: 320px;
     max-width: 320px;
-    background-color: var(--clr-videa-secondary);
-    box-shadow: var(--shadow-videa-medium);
 }
 
 .video-thumbnail-box{

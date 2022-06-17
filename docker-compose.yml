@@ -16,10 +16,9 @@ services:
 
     video-service:
         build: ./VideoService
-        container_name: videoservice
         image: voidbgs/videoservice
         ports:
-            - "7001:80"
+            - "7000:80"
         networks:
             - video-service
         restart: on-failure
@@ -31,7 +30,7 @@ services:
         container_name: likeservice
         image: voidbgs/likeservice
         ports:
-            - "7002:80"
+            - "8002:80"
         networks:
             - video-service
         restart: on-failure

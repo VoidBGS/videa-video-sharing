@@ -58,16 +58,7 @@ namespace VideoService.Controller
             _repository.SaveChanges();
 
             var videoReadDto = _mapper.Map<VideoReadDto>(video);
-            //HTTP SYNC METHOD WAS HERE
-            //try
-            //{
-            //    await _likeDataClient.SendVideoIdToLikes(4);
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine($"Something really bad happened during creating the video and sending it to the likes service {e.InnerException}");
-            //}
-
+            
             try
             {
                 var videoPublishedDto = _mapper.Map<VideoPublishDto>(videoReadDto);

@@ -16,9 +16,9 @@ const MainVideo = ({ video, likes, getLikesById }) => {
         e.preventDefault();
         let URL = "";
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development' || process.env.JEST_WORKER_ID) {
-            URL = process.env.REACT_APP_VIDEOS_SERVICE_TESTING;
+            URL = process.env.REACT_APP_LIKES_SERVICE;
         } else {
-            URL = process.env.REACT_APP_VIDEOS_SERVICE;
+            URL = process.env.REACT_APP_LIKES_SERVICE;
         }
         let form = {videoId: id};
         axios.post(URL, form)

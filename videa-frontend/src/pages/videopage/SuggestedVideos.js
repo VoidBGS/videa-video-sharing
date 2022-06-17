@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoBox from '../../components/video/VideoBox';
-import {cropIfExceed} from "../../func/titleCrop";
+import { cropIfExceed } from "../../func/titleCrop";
 
 const SuggestedVideos = () => {
 
@@ -29,35 +29,37 @@ const SuggestedVideos = () => {
 
     return (
         <div className='suggested-videos-box w-half pb-4'>
-            <div className='suggested-video my-1'>
-                <img src={vid.source} className="suggested-video-thumbnail"></img>
-                <div className='suggested-video-title p-1'>{cropIfExceed(vid.title, allowedLength)}</div>
-                <div className='suggested-video-views'>1337 Views</div>
-            </div>
-            <div className='suggested-video my-1'>
-                <img src={vid2.source} className="suggested-video-thumbnail"></img>
-                <div className='suggested-video-title p-1'>{cropIfExceed(vid2.title, allowedLength)}</div>
-                <div className='suggested-video-views'>1337 Views</div>
-            </div>
-            <div className='suggested-video my-1'>
-                <img src={vid3.source} className="suggested-video-thumbnail"></img>
-                <div className='suggested-video-title p-1'>{cropIfExceed(vid3.title, allowedLength)}</div>
-                <div className='suggested-video-views'>1337 Views</div>
-            </div>
-            <div className='suggested-video my-1'>
-                <img src={vid.source} className="suggested-video-thumbnail"></img>
-                <div className='suggested-video-title p-1'>{cropIfExceed(vid.title, allowedLength)}</div>
-                <div className='suggested-video-views'>1337 Views</div>
-            </div>
-            <div className='suggested-video my-1'>
-                <img src={vid2.source} className="suggested-video-thumbnail"></img>
-                <div className='suggested-video-title p-1'>{cropIfExceed(vid2.title, allowedLength)}</div>
-                <div className='suggested-video-views'>1337 Views</div>
-            </div>
-            <div className='suggested-video my-1'>
-                <img src={vid3.source} className="suggested-video-thumbnail"></img>
-                <div className='suggested-video-title p-1'>{cropIfExceed(vid3.title, allowedLength)}</div>
-                <div className='suggested-video-views'>1337 Views</div>
+            <div className='suggested-videos-wrap'>
+                <div className='suggested-video my-1'>
+                    <img src={vid.source} className="suggested-video-thumbnail"></img>
+                    <div className='suggested-video-title p-1'>{cropIfExceed(vid.title, allowedLength)}</div>
+                    <div className='suggested-video-views'>1337 Views</div>
+                </div>
+                <div className='suggested-video my-1'>
+                    <img src={vid2.source} className="suggested-video-thumbnail"></img>
+                    <div className='suggested-video-title p-1'>{cropIfExceed(vid2.title, allowedLength)}</div>
+                    <div className='suggested-video-views'>1337 Views</div>
+                </div>
+                <div className='suggested-video my-1'>
+                    <img src={vid3.source} className="suggested-video-thumbnail"></img>
+                    <div className='suggested-video-title p-1'>{cropIfExceed(vid3.title, allowedLength)}</div>
+                    <div className='suggested-video-views'>1337 Views</div>
+                </div>
+                <div className='suggested-video my-1'>
+                    <img src={vid.source} className="suggested-video-thumbnail"></img>
+                    <div className='suggested-video-title p-1'>{cropIfExceed(vid.title, allowedLength)}</div>
+                    <div className='suggested-video-views'>1337 Views</div>
+                </div>
+                <div className='suggested-video my-1'>
+                    <img src={vid2.source} className="suggested-video-thumbnail"></img>
+                    <div className='suggested-video-title p-1'>{cropIfExceed(vid2.title, allowedLength)}</div>
+                    <div className='suggested-video-views'>1337 Views</div>
+                </div>
+                <div className='suggested-video my-1'>
+                    <img src={vid3.source} className="suggested-video-thumbnail"></img>
+                    <div className='suggested-video-title p-1'>{cropIfExceed(vid3.title, allowedLength)}</div>
+                    <div className='suggested-video-views'>1337 Views</div>
+                </div>
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ const Title = ({ info }) => {
     }, [title, id]);
 
     return title ? (
-        <Link to={"video/" + id} className="videa-link-dark video-title">
+        <Link to={"video/" + id} className="videa-link video-title">
             <div className="font-bold">
                 {cropIfExceed(title, allowedLength)}
             </div>
