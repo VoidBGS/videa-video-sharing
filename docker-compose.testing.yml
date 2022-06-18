@@ -21,7 +21,7 @@ services:
         environment:
           ASPNETCORE_ENVIRONMENT: Development
         ports:
-            - "7001:80"
+            - "7000:80"
         networks:
             - testing-video-service
         restart: on-failure
