@@ -65,3 +65,6 @@ C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\obj\De
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\RabbitMQ.Client.dll
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\Npgsql.dll
 C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\Auth0.AspNetCore.Authentication.dll
+C:\Users\User\Desktop\Uni2022\Individual\videa-video-sharing\VideoService\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll

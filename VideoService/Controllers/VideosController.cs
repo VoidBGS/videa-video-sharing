@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VideoService.AsyncComm;
 using VideoService.Data;
@@ -10,6 +11,7 @@ namespace VideoService.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VideosController : ControllerBase
     {
         private readonly IVideoRepo _repository;

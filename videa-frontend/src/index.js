@@ -9,6 +9,7 @@ ReactDOM.render(
   <Auth0Provider
     domain="dev-0oy7iyui.us.auth0.com"
     clientId="buSo0pTNxS3mqBLZu2I3TespbMrcShxY"
+    audience='https://videa-auth'
     redirectUri={window.location.origin}
   >
     <React.StrictMode>

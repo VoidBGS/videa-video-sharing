@@ -7,7 +7,7 @@ import SuggestedVideos from './SuggestedVideos';
 import { useAuth0 } from "@auth0/auth0-react";
 
 const VideoPage = () => {
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
     const [video, setVideo] = useState({});
     const [likes, setLikes] = useState([]);
     const [error, setError] = useState(false);
@@ -19,13 +19,19 @@ const VideoPage = () => {
         getLikesByVideoId();
     }, []);
 
-    const getVideoById = () => {
-        if (!isAuthenticated && typeof(process.env.JEST_WORKER_ID) == undefined) {
+    const getVideoById = async () => {
+        if (!isAuthenticated && typeof (process.env.JEST_WORKER_ID) == undefined) {
             console.error("Unauthorized request detected!");
             return;
         }
         setIsLoading(true);
-        axios.get(process.env.REACT_APP_VIDEOS_SERVICE + id)
+        const TOKEN = await getAccessTokenSilently();
+        console.log(TOKEN);
+        await axios.get(process.env.REACT_APP_VIDEOS_SERVICE + id, {
+            headers: {
+                Authorization: `Bearer ${TOKEN}`,
+            },
+        })
             .then(function (response) {
                 setIsLoading(false);
                 setVideo(response.data);
@@ -39,7 +45,7 @@ const VideoPage = () => {
     }
 
     const getLikesByVideoId = () => {
-        if (!isAuthenticated && typeof(process.env.JEST_WORKER_ID) == undefined) {
+        if (!isAuthenticated && typeof (process.env.JEST_WORKER_ID) == undefined) {
             console.error("Unauthorized request detected!");
             return;
         }
@@ -59,15 +65,15 @@ const VideoPage = () => {
             </div>
         ) : (
             <div className='video-page flex between w-full' data-testid="video-page-main">
-            {
-                error ? <Navigate to="/404" replace={true} /> : ""
-            }
+                {
+                    error ? <Navigate to="/404" replace={true} /> : ""
+                }
 
-            {
-                video ? <MainVideo video={video} likes={likes} getLikesById={getLikesByVideoId} /> : <MainVideo />
-            }
-            <SuggestedVideos />
-        </div>
+                {
+                    video ? <MainVideo video={video} likes={likes} getLikesById={getLikesByVideoId} /> : <MainVideo />
+                }
+                <SuggestedVideos />
+            </div>
         )
 
     );
