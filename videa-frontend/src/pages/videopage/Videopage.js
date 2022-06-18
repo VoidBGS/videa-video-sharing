@@ -24,9 +24,14 @@ const VideoPage = () => {
             console.error("Unauthorized request detected!");
             return;
         }
+
+        let TOKEN = "";
         setIsLoading(true);
-        const TOKEN = await getAccessTokenSilently();
-        console.log(TOKEN);
+
+        if (typeof(process.env.JEST_WORKER_ID) == undefined) {
+            TOKEN = await getAccessTokenSilently();
+        }
+
         await axios.get(process.env.REACT_APP_VIDEOS_SERVICE + id, {
             headers: {
                 Authorization: `Bearer ${TOKEN}`,

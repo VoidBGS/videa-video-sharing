@@ -16,12 +16,13 @@ const Homepage = () => {
 
     const getVideos = async () => {
         let URL = "";
-        const TOKEN = await getAccessTokenSilently();;
+        let TOKEN = "";
 
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development' || process.env.JEST_WORKER_ID) {
             URL = process.env.REACT_APP_VIDEOS_SERVICE_TESTING;
         } else {
             URL = process.env.REACT_APP_VIDEOS_SERVICE;
+            TOKEN = await getAccessTokenSilently();
         }
         if (URL !== "") {
             await axios.get(URL, {
