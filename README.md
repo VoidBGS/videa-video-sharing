@@ -43,7 +43,7 @@ Running this project is very easy if you have Docker
 This method should work currently (5/30/2022)
 1. Pull this repository
 2. Run my docker-compose file
-3. Type localhost as browser URL and everything should be automatically set
+3. URL - localhost
 
 If the method above does not work, since I am reliant on the cloud for my database. Run my docker-compose.testing file with the
 **docker-compose -f docker-compose-testing.yml** command in the CLI. This will run everything in testing and development mode. The databases will be In-Memory, but they will work and will give a good idea of what the project is supposed to work like.
