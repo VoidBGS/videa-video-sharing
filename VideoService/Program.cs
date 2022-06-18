@@ -60,8 +60,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-app.UseAuthentication();
-app.UseAuthorization();
+
 
 SeedDatabase.PrepData(app, environment.IsProduction());
 
@@ -71,6 +70,11 @@ if (app.Environment.IsDevelopment())
     app.UseCors(allowEveryOrigin);
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else if(app.Environment.IsProduction())
+{
+    app.UseAuthentication();
+    app.UseAuthorization();
 }
 
 app.UseHttpsRedirection();
