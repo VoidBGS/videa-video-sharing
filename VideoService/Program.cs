@@ -11,10 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 var allowEveryOrigin = "_myAllowSpecificOrigins";
 IWebHostEnvironment environment = builder.Environment;
 
-builder.Services.AddControllers();
 builder.Services.AddScoped<IVideoRepo, VideoRepo>();
 if (environment.IsProduction())
 {
+    builder.Services.AddControllers((options =>
+    {
+        var policy = new AuthorizationPolicyBuilder()
+            .RequireAuthenticatedUser()
+            .Build();
+        options.Filters.Add(new AuthorizeFilter(policy));
+    }));
     Console.WriteLine("Using Azure SQL Server Database..");
     builder.Services.AddDbContext<AppDbContext>(
     opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("VideaContext")));
@@ -31,7 +37,10 @@ if (environment.IsProduction())
 }
 else
 {
+    builder.Services.AddControllers();
+
     Console.WriteLine("Using In-Memory Database..");
+
     builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMemory"));
 
     builder.Services.AddCors(options =>
