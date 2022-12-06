@@ -31,7 +31,7 @@ I used PostgreSQL for my database of choice. Postgre is an open-source *object* 
 Since I decided to move to the cloud I changed my database. I decided that I should migrate to the Azure SQL Server database, that is a paid service (but I got it for free for 1 year). The new database is easier to setup in the cloud, as I do not need any setup files and I can just hook it up very easy in production.
 
 ## Security
-I am working on this right now.
+Authentication and Authorization are handled by Auth0 and the token is sent to the security manager hosted at Auth0. The services are connected to the secrutiy manager are secured. The frontend is also integrated with Auth0. Azure is responsible for the logging and monitoring of user activity.
 
 ## Microsoft Azure Deployment
 I've decided to deploy my application on microsoft azure. I chose this over AWS as I have a student account with 100$ to spare from my university and setting up the environment there would not be that difficult from what I researched. The main problem that I forsee is that my database and nginx conf file would need to be allocated on the cloud as well. I am considering switching to a online cloud database an not bothering with an image.
